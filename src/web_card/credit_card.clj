@@ -1,7 +1,11 @@
 (ns web-card.credit-card
   (:require [clojure.string :as str]))
 
-(defn valid? [card-number]
+(defn valid?
+  "Validate credit card number using Luhn algorithm.
+   `card-number` should be a string of digits.
+   Whitespaces are allowed but ingnored."
+  [card-number]
   (let [card-number' (str/replace card-number #"\s" "")]
     (and (and (every? #(Character/isDigit %) card-number')
               (> (count card-number') 1))
